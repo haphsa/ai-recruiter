@@ -11,13 +11,13 @@ export default function LoginPage() {
   // Function to handle button click for Recruiter
   const handleRecruiterLogin = () => {
    
-    router.push("/?role=recruiter");
+    
     router.push("/"); 
   };
 
   // Function to handle button click for Job Seeker
   const handleJobSeekerLogin = () => {
-    router.push("/?role=jobseeker");
+   
     router.push("/dashboard-jobseeker"); 
   };
 

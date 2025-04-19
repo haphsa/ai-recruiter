@@ -10,8 +10,8 @@ export default function ApplyModal({ isOpen, onClose, onApply, applicationDetail
 
   const modalStyle = {
     position: 'absolute',
-    top: position.top + 2+ 'px', // push it slightly below the button
-    left: position.left - offset + 'px', // center the modal under the button
+    top: position.top + 2+ 'px', 
+    left: position.left - offset + 'px',
     zIndex: 9999,
     background: 'var(--primary-color)',
 

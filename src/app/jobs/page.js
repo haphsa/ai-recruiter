@@ -8,10 +8,11 @@ import ApplyModal from './ApplyModal';
 import { padding } from '@mui/system';
 import Jobs from '../jobstable';
 
-
+import {useRef } from "react";
 
 export default function JobBoardPage() {
   
+ 
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
@@ -24,6 +25,7 @@ export default function JobBoardPage() {
   const [detailsOpen, setDetailsOpen] = useState(false);
   const [search, setSearch] = useState('');
   const [sort, setSort] = useState('newest');
+  const [open, setOpen] = useState(false);
   const [filters, setFilters] = useState({
     jobType: {
       fullTime: true,
@@ -33,7 +35,9 @@ export default function JobBoardPage() {
     salaryRange: [0, 500],
   });
 
- 
+  const [arrowFlipped, setArrowFlipped] = useState(false);
+  const selectRef = useRef(null);
+
   const [jobToApply, setJobToApply] = useState(null); // job clicked for modal
 
   const handleReset = () => {
@@ -46,7 +50,7 @@ export default function JobBoardPage() {
       salaryRange: [0, 500],
     });
   };
-
+  const [rotated, setRotated] = useState(false);
   const handleApply = () => {
     console.log('Filters applied:', filters);
   };
@@ -69,33 +73,61 @@ export default function JobBoardPage() {
     setIsModalOpen(false);
     setJobToApply(null);
   };
+  const handleSelectClick = () => {
+    setArrowFlipped((prev) => !prev); 
+  };
 
   return (
     <div className="p-1 tab-jobs bg-[var(--background)]">
       <h1 className="text-2xl font-bold mb-1">Explore Jobs</h1>
       <div className="tab-jobs-main   pt-4">
-        <div className="flex-[0.7]">
+        <div className="flex-[1]">
           {/* Controls */}
           <div className="flex items-center gap-4 mb-6 gap-4 bottomline">
             <div className="pl-1">
               <h1 className="imp-text">Job Board</h1>
             </div>
             <div className="flex flex-row gap-2 ml-auto items-right">
-              <select
-                value={sort}
-                onChange={(e) => setSort(e.target.value)}
-                className="border px-2 py-1 rounded-[15px] "
-              >
-                <option value="newest">newest</option>
-                <option value="oldest">oldest</option>
-              </select>
+            <div className="relative inline-block w-max">
+      <select
+        ref={selectRef}
+        value={sort}
+        onChange={(e) => setSort(e.target.value)}
+        onClick={handleSelectClick} 
+        className="appearance-none border px-2 py-1 pr-8 rounded-[15px] cursor-pointer"
+      >
+        <option value="newest" >newest</option>
+        <option value="oldest">oldest</option>
+      </select>
+
+      {/* Rotating Arrow */}
+      <div
+        className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 z-10"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className={`w-4 h-4 text-gray-700 transition-transform  ${
+            arrowFlipped ? 'rotate-180' : 'rotate-0'
+          }`}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2}
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+      </div>
+    </div>
+
+
               <div className="relative flex items-center">
                 <input
                   type="text"
+                  
                   placeholder="Type here..."
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
-                  className="border py-1 rounded-[15px] w-full pl-1"
+                  className="border py-1 rounded-[15px] w-full pl-4"
                 />
                 <SearchIcon
                   sx={{
@@ -115,7 +147,7 @@ export default function JobBoardPage() {
         
 
         </div>
-        <div className='pt-17 flex-[0.3]'><Filters
+        <div className='pt-17 flex-[0.2]'><Filters
           filters={filters}
           setFilters={setFilters}
           onReset={handleReset}

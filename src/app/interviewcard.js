@@ -36,7 +36,7 @@ export default function InterviewCard() {
         {/* Profile Section */}
         <div className="flex items-center space-x-4 mt-4">
           <img
-            src={profilePic} // Dynamically set the image based on gender
+            src={profilePic || null} // Dynamically set the image based on gender
             alt="Profile"
             className="w-14 h-14 rounded-full object-cover"
           />

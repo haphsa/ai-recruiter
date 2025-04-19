@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import DetailsPanel from './jobs/details'; // Assuming your details component is inside jobs directory
 import ApplyModal from './jobs/ApplyModal';
@@ -399,7 +401,7 @@ export default function JobTable({ title = 'Hiring Pipeline', itemsPerPage = 5, 
                       Details
                     </div>
                     {job.applied || applied ? (
-  <span className="border px-4 py-1 font-semibold rounded-[15px] bg-[var(--foreground)] opacity-70 text-white w-full inline-block text-center">
+  <span className="border px-4 py-2 font-semibold rounded-[15px] bg-[var(--foreground)] cursor-not-allowed opacity-70 text-white w-full inline-block text-center">
     Applied
   </span>
 ) : (
@@ -430,25 +432,24 @@ export default function JobTable({ title = 'Hiring Pipeline', itemsPerPage = 5, 
         </button>
         
         <span className="text-sm text-gray-700">Page {currentPage}</span>
-<button
-  onClick={() => setCurrentPage((prev) => prev + 1)}
-  disabled={currentPage === totalPages}
-  className={`px-3 py-1 text-sm border rounded disabled:opacity-50 ${
-    currentPage === totalPages
-      ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
-      : 'bg-[#7e5ca0] text-white hover:bg-[#6b4b8c]'
-  }`}
->
-  Next
-</button>
+      <button
+        onClick={() => setCurrentPage((prev) => prev + 1)}
+        disabled={currentPage === totalPages}
+        className={`px-3 py-1 text-sm border rounded disabled:opacity-50 ${
+          currentPage === totalPages
+            ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
+            : 'bg-[#7e5ca0] text-white hover:bg-[#6b4b8c]'
+        }`}
+      >
+        Next
+      </button>
 
       </div>
 
-      {/* Pass the state to the DetailsPanel component */}
       <DetailsPanel
         open={isDetailsOpen}
         onClose={() => setIsDetailsOpen(false)} 
-        job={selectedJob} // Pass the selected job data
+        job={selectedJob} 
       />
     
     <ApplyModal

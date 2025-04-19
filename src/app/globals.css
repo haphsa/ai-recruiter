@@ -30,6 +30,9 @@
    
   }
 }
+/* CSS */
+
+
 .bodycolor{
   background: var(--background);
 
@@ -277,6 +280,7 @@ padding-bottom: 10px;}
 .custom-button:hover {
   background-color: var(--icons);
   color: white;
+  cursor: pointer;
 }
 .purpleshade{
   background-color: var(--purpleshade);

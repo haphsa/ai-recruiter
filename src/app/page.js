@@ -4,13 +4,10 @@
 import { useState } from 'react';
 import ArrowBackIos from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIos from '@mui/icons-material/ArrowForwardIos';
-import VideocamOutlinedIcon from '@mui/icons-material/VideocamOutlined';
-import EditIcon from '@mui/icons-material/Edit';
-import IconButton from '@mui/material/IconButton';
-import JobCard from './jobscard';
 
+import KPI from './kpi';
 import Filters from './Filters';
-import { ArrowUpRight } from "lucide-react";
+
 
 
 export default function Home() {
@@ -72,7 +69,9 @@ const totalPages = 2;
   const [jobToApply, setJobToApply] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   
-
+  const jobsposted="+23";
+  const TotalApplicants="+45";
+  const Interviewedno="+7";
 
 
 
@@ -82,242 +81,84 @@ const totalPages = 2;
         {/* stats box */}
         <div className=" flex  justify-between gap-5">
           {/* Job stats box */}
-          <div className="purpleshade flex-[1] rounded-2xl p-6 w-full max-w-sm shadow-md h-70">
-            <div className="flex justify-between items-start">
-              <div>
-                <p className="text-sm font-bold">Jobs Posted</p>
-                <div className="flex items-center mt-1">
-                  <h2 className="text-5xl font-semibold">+120</h2>
-                  <div className='pl-2'>
-                  <div className="flex items-center text-green-600 text-sm font-medium px-2 py-1 bg-white rounded-full ml-2 shadow-sm">
-                    <ArrowUpRight className="w-4 h-4 mr-1" />
-                    24%
-                  </div>
-
-                    <p className="text-sm  mt-1 pl-2 text-gray-600 font-thin">vs last week</p></div>
-                  
-                </div>
-                
-              </div>
-              <div className="">
+          <KPI
+            title="Jobs Posted"
+            value={jobsposted}
+            percentage="24%"
+            comparison="vs last week"
+            icon={(
               <svg
-                className="w-6 h-6 text-gray-600"
-                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24" height="24"
                 viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="lucide lucide-award w-6 h-6 text-gray-600"
               >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-award-icon lucide-award"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/><circle cx="12" cy="8" r="6"/></svg>
+                <path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/>
+                <circle cx="12" cy="8" r="6"/>
+              </svg>
+            )}
+            bgClass="purpleshade"
 
-
-                </svg>
-              </div>
-            </div>
-
-            <div className="flex items-end justify-end mt-6 space-x-3 h-32">
-              {Array.from({ length: 5 }).map((_, colIdx) => (
-                <div key={colIdx} className="flex flex-col justify-end items-center space-y-1">
-                  {Array.from({ length: 3 }).map((_, barIdx) => {
-                    // Generate different heights for bars (10px to 40px)
-                    const height = Math.floor(Math.random() * 30) + 10;
-
-                    // Styles for each bar
-                    let style = {
-                      height: `${height}px`,
-                      width: "35px",
-                      borderRadius: "0.375rem",
-                    };
-
-                    // Add patterns to style
-                    if (barIdx === 0) {
-                      style = {
-                        ...style,
-                        backgroundImage: `
-                          radial-gradient(rgb(84, 82, 110) 30%, transparent 30%),
-                          radial-gradient(rgb(84, 82, 110) 30%, transparent 30%)
-                        `,
-                        backgroundPosition: "0px 0px, 5px 5px",
-                        backgroundSize: "10px 10px",
-                        backgroundColor: "transparent",
-                     
-                      };
-                    } else if (barIdx === 1) {
-                      style = {
-                        ...style,
-                        backgroundImage:
-                          "linear-gradient(45deg, #54526e 25%, transparent 25%, transparent 50%, #54526e 50%, #54526e 75%, transparent 75%, transparent 100%)",
-                        backgroundSize: "10px 10px",
-                      };
-                    } else {
-                      style = {
-                        ...style,
-                        background: "linear-gradient(to top,rgb(122, 125, 130), #54526e)", // fallback
-                      };
-                    }
-
-                    return <div key={barIdx} style={style}></div>;
-                  })}
-                </div>
-  ))}
-            </div>
-
-
-          </div>
-          {/* Job stats box */}
-          <div className="blueshade flex-[1] rounded-2xl p-6 w-full max-w-sm shadow-md">
-            <div className="flex justify-between items-start">
-              <div>
-                <p className="text-sm font-bold"> Total Applicants</p>
-                <div className="flex items-center mt-1">
-                  <h2 className="text-5xl font-semibold">+17</h2>
-                  <div className='pl-2'>
-                  <div className="flex items-center text-red-600 text-sm font-medium px-2 py-1 bg-white rounded-full ml-2 shadow-sm">
-                    <ArrowUpRight className="w-4 h-4 mr-1" style={{ transform: 'scaleY(-1)' }} />
-                    31%
-                  </div>
-
-
-                    <p className="text-sm  mt-1 pl-2 text-gray-600 font-thin">vs last week</p></div>
-                  
-                </div>
-                
-              </div>
-              <div className="">
+          />
+           <KPI
+            title="Total Applicants"
+            value={TotalApplicants}
+            percentage="14%"
+            comparison="vs last week"
+            icon={(
               <svg
-                className="w-6 h-6 text-gray-600"
-                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24" height="24"
                 viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="lucide lucide-users w-6 h-6 text-gray-600"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users-round-icon lucide-users-round"><path d="M18 21a8 8 0 0 0-16 0"/><circle cx="10" cy="8" r="5"/><path d="M22 20c0-3.37-2-6.5-4-8a5 5 0 0 0-.45-8.3"/></svg>
-                </svg>
-              </div>
-            </div>
-
-            <div className="flex items-end justify-end mt-6 space-x-3 h-32">
-              {Array.from({ length: 5 }).map((_, colIdx) => (
-                <div key={colIdx} className="flex flex-col justify-end items-center space-y-1">
-                  {Array.from({ length: 3 }).map((_, barIdx) => {
-                    // Generate different heights for bars (10px to 40px)
-                    const height = Math.floor(Math.random() * 30) + 10;
-
-                    // Styles for each bar
-                    let style = {
-                      height: `${height}px`,
-                      width: "35px",
-                      borderRadius: "0.375rem",
-                    };
-
-                    // Add patterns to style
-                    if (barIdx === 0) {
-                      style = {
-                        ...style,
-                        backgroundImage: `
-                          radial-gradient(rgb(84, 82, 110) 30%, transparent 30%),
-                          radial-gradient(rgb(84, 82, 110) 30%, transparent 30%)
-                        `,
-                        backgroundPosition: "0px 0px, 5px 5px",
-                        backgroundSize: "10px 10px",
-                        backgroundColor: "transparent",
-                        border: "",
-                      };
-                    } else if (barIdx === 1) {
-                      style = {
-                        ...style,
-                        backgroundImage:
-                          "linear-gradient(45deg, #54526e 25%, transparent 25%, transparent 50%, #54526e 50%, #54526e 75%, transparent 75%, transparent 100%)",
-                        backgroundSize: "10px 10px",
-                      };
-                    } else {
-                      style = {
-                        ...style,
-                        background: "linear-gradient(to top,rgb(122, 125, 130), #54526e)", // fallback
-                      };
-                    }
-
-                    return <div key={barIdx} style={style}></div>;
-                  })}
-                </div>
-              ))}
-            </div>
-
-
-          </div>
-          {/* Job stats box */}
-          <div className="pinkshade flex-[1] rounded-2xl p-6 w-full max-w-sm shadow-md">
-            <div className="flex justify-between items-start">
-              <div>
-                <p className="text-sm font-bold">Interviewed</p>
-                <div className="flex items-center mt-1">
-                  <h2 className="text-5xl font-semibold">+19</h2>
-                  <div className='pl-2'>
-                  <div className="flex items-center text-green-600 text-sm font-medium px-2 py-1 bg-white rounded-full ml-2 shadow-sm">
-                    <ArrowUpRight className="w-4 h-4 mr-1" />
-                    14%
-                  </div>
-
-                    <p className="text-sm  mt-1 pl-2 text-gray-600 font-thin">vs last week</p></div>
-                  
-                </div>
-                
-              </div>
-              <div className="">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            )}
+            
+            bgClass="blueshade"
+            direction="down"
+          />
+          <KPI
+            title="Interviewed"
+            value={Interviewedno}
+            percentage="26%"
+            comparison="vs last week"
+            icon={(
               <svg
-                className="w-6 h-6 text-gray-600"
-                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24" height="24"
                 viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="lucide lucide-message-circle w-6 h-6 text-gray-600"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-messages-square-icon lucide-messages-square"><path d="M14 9a2 2 0 0 1-2 2H6l-4 4V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2z"/><path d="M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1"/></svg>
-                </svg>
-              </div>
-            </div>
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.5z"/>
+              </svg>
+            )}
+            
+            
+            bgClass="pinkshade"
+          />
 
-            <div className="flex items-end justify-end mt-6 space-x-3 h-32">
-              {Array.from({ length: 5 }).map((_, colIdx) => (
-                <div key={colIdx} className="flex flex-col justify-end items-center space-y-1">
-                  {Array.from({ length: 3 }).map((_, barIdx) => {
-                    // Generate different heights for bars (10px to 40px)
-                    const height = Math.floor(Math.random() * 30) + 10;
-
-                    // Styles for each bar
-                    let style = {
-                      height: `${height}px`,
-                      width: "35px",
-                      borderRadius: "0.375rem",
-                    };
-
-                    // Add patterns to style
-                    if (barIdx === 0) {
-                      style = {
-                        ...style,
-                        backgroundImage: `
-                          radial-gradient(rgb(84, 82, 110) 30%, transparent 30%),
-                          radial-gradient(rgb(84, 82, 110) 30%, transparent 30%)
-                        `,
-                        backgroundPosition: "0px 0px, 5px 5px",
-                        backgroundSize: "10px 10px",
-                        backgroundColor: "transparent",
-                        border: "",
-                      };
-                    } else if (barIdx === 1) {
-                      style = {
-                        ...style,
-                        backgroundImage:
-                          "linear-gradient(45deg, #54526e 25%, transparent 25%, transparent 50%, #54526e 50%, #54526e 75%, transparent 75%, transparent 100%)",
-                        backgroundSize: "10px 10px",
-                      };
-                    } else {
-                      style = {
-                        ...style,
-                        background: "linear-gradient(to top,rgb(122, 125, 130), #54526e)", // fallback
-                      };
-                    }
-
-                    return <div key={barIdx} style={style}></div>;
-                  })}
-                </div>
-              ))}
-            </div>
-
-
-          </div>
+         
+         
           
           
           
@@ -333,7 +174,7 @@ const totalPages = 2;
   <div className='flex justify-between p-3'>
     <h2 className="text-lg font-semibold">Posted Jobs</h2>
     <button className="p-1 hover:bg-gray-100 rounded-full">
-      {/* Three dots vertical (kebab menu) */}
+      {/* Three dots vertical*/}
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="h-5 w-5 text-gray-500"

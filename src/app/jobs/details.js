@@ -1,6 +1,6 @@
-// jobs/details.js
-'use client'
+'use client';
 import React from 'react';
+import  { useEffect, useState } from 'react';
 
 import {
   Drawer,
@@ -15,11 +15,25 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 
 export default function DetailsPanel({ open, onClose, job }) {
   if (!job) return null;
+  const [visible, setVisible] = useState(false);
+
+useEffect(() => {
+  if (open) {
+    // Delay setting visible to allow transition
+    const timer = setTimeout(() => {
+      setVisible(true);
+    }, 10); 
+  } else {
+    setVisible(false);
+  }
+}, [open]);
+
 
   return (
     <Drawer
       anchor="right"
-      open={open}
+      open={visible}
+    
       onClose={onClose}
       hideBackdrop={false}
       PaperProps={{
@@ -59,7 +73,7 @@ export default function DetailsPanel({ open, onClose, job }) {
             paddingRight: 3,
             zIndex: 1,
                 '&:hover': {
-          backgroundColor: 'transparent', // removes the grey hover background
+          backgroundColor: 'transparent',  
         },
           }}
         >
@@ -69,9 +83,9 @@ export default function DetailsPanel({ open, onClose, job }) {
 
       {/* Main Content */}
       <Box className="pl-8 pt-8 pr-8 flex flex-col gap-8 w-full">
-        {/* Header Row */}
+     
         <Box className="flex w-full items-start justify-between bottomline">
-          {/* Left: Logo + Info */}
+      
           <Box className="flex gap-2">
             <img
               src="/icon.png"
@@ -99,7 +113,7 @@ export default function DetailsPanel({ open, onClose, job }) {
             </Box>
           </Box>
 
-          {/* Right: Apply Button */}
+       
           <Button
   variant="outlined"
   sx={{
@@ -153,7 +167,7 @@ export default function DetailsPanel({ open, onClose, job }) {
           </Typography>
         </Box>
 
-        {/* Description */}
+    
         <Typography variant="body1" mt={2}>
           {job.description || 'Role overview and responsibilities go here...'}
         </Typography>
